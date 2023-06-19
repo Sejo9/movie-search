@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Cinematic Empire</title>
+    <meta name="description" content="A movie search web application that allows users to search 
+        for movies and view details about each movie" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <div id="movie-modal" class="modal" style="display: none;">
+        <div id="modal-content">
+            <img id="movie-img" src="https://m.media-amazon.com/images/M/MV5BYjQ1ZTMxNzgtZDcxOC00NWY5LTk3ZjAtYzRhMDhlNDZlOWEzXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg" />
+            <div id="movie-details">
+                <h1 id="title">Movie Title</h1>
+                
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <header>
+            <i class="fa-solid fa-film fa-3x" style="color: #3282b8;"></i>
+            <h1>Cinematic Empire</h1>
+        </header>
+
+        <main>
+            <section id="search-section">
+                <form id="search-form" method="post">
+                    <input id="title-input" name="title" type="text" placeholder="Movie Title" />
+
+                    <input id="year" name="year" type="number" placeholder="Year" />
+
+                    <select id="type" name="type">
+                        <option value="" selected disabled>Type</option>
+                        <option value="movie">Movie</option>
+                        <option value="series">Series</option>
+                        <option value="episode">Episode</option>
+                    </select>
+
+                    <select id="sorting" name="sorting">
+                        <option value="" selected disabled>Sort By</option>
+                        <option value="title">Title</option>
+                        <option value="year">Year</option>
+                    </select>
+
+                    <button id="search-btn" class="btn-primary">Search</button>
+                </form>
+            </section>
+
+            <h2 id="no-results">No Results Found!</h2>
+
+            <section id="movie-results">
+
+                
+            </section>
+
+            <div id="paging-container" style="display: none">
+                <button id="prev-btn" class="btn-secondary">&lt; Prev</button>
+                <div id="page-count">
+                    <span id="current-page"></span>
+                    of
+                    <span id="max-pages"></span>
+                </div>
+                <button id="next-btn" class="btn-secondary">Next &gt;</button>
+            </div>
+        </main>
+    </div>
+
+
+    <footer>
+        <h4>Follow Us: </h4>
+        <a href=""><i class="fa-brands fa-instagram fa-xl" style="color: #3282b8;"></i></a>
+        <a href=""><i class="fa-brands fa-facebook fa-xl" style="color: #3282b8;"></i></a>
+        <a href=""><i class="fa-brands fa-twitter fa-xl" style="color: #3282b8;"></i></a>
+        <a href=""><i class="fa-brands fa-youtube fa-xl" style="color: #3282b8;"></i></a>
+        <a href=""><i class="fa-brands fa-whatsapp fa-xl" style="color: #3282b8;"></i></a>
+        <a href=""><i class="fa-brands fa-telegram fa-xl" style="color: #3282b8;"></i></a>
+        
+        
+        
+        
+        
+        
+    </footer>
+
+
+    <script src="https://kit.fontawesome.com/d3b0224b50.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
