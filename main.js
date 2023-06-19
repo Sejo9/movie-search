@@ -3,7 +3,6 @@ $(document).ready(() => {
   let url;
   let pagingData;
   let storedSorting;
-  let viewedMovie;
 
   //Searh form variables
   const $searchForm = $("#search-form");
@@ -11,7 +10,6 @@ $(document).ready(() => {
   const $year = $("#year");
   const $type = $("#type");
   const $sorting = $("#sorting");
-  const $searchBtn = $("#search-btn");
 
   //Movie results variables
   const $noResults = $("#no-results");
@@ -23,6 +21,13 @@ $(document).ready(() => {
   const $nextBtn = $("#next-btn");
   const $currentPage = $("#current-page");
   const $maxPages = $("#max-pages");
+
+  //Modal variables
+  const $modal = $("#movie-modal");
+  const $modalPoster = $("#movie-img");
+  const $modalDetails = $("#movie-details");
+  const $modalTitle = $("#movie-title");
+  const $modalClose = $(".close")
 
   //Set year input max value
   const setMaxYear = () => $year.attr("max", new Date().getFullYear());
@@ -70,12 +75,60 @@ $(document).ready(() => {
     }
   };
 
-  const loadMovie = (movie) => {
-    console.log(movie)
-    $.getJSON("url", (data, status) => {
-            
+  const displayModal = (movie) => {
+    $modal.show();
+
+    $modalPoster.attr("src", movie.Poster);
+
+    $modalDetails.children ? $modalDetails.empty() : null;
+
+    Object.keys(movie).forEach((key) => {
+        if(key === "Title"){
+            $modalDetails.append(
+                `<h1 id="movie-title">${movie[key]}</h1>`
+              );
         }
-    );
+      if (key !== "Title" && key !== "Poster" && key !== "Response") {
+        if (movie[key] !== "N/A") {
+            if(key == "Ratings"){
+                console.log(movie[key])
+                $modalDetails.append(
+                    `<p><strong>${key}</strong>:</p>`
+                  );
+                movie[key].forEach(rating => {
+                    $modalDetails.append(
+                        `<p class="rating"><strong>${rating.Source}</strong>: ${rating.Value}</p>`
+                      );
+                })
+                
+            }else{
+                $modalDetails.append(
+                    `<p><strong>${key}</strong>: ${movie[key]}</p>`
+                  );
+            }
+          
+        }
+      }
+    });
+  };
+
+  //Close modal upon clicking anywhere outside the modal
+  $(window).click((event) => {
+    if (event.target == $modal.get(0)) {
+        $modal.hide();
+    }
+  })
+
+  //Close modal upon clicking on close button
+  $modalClose.click(() => $modal.hide())
+
+  //Get data for modal
+  const loadMovie = (movie) => {
+    let movieUrl = `http://www.omdbapi.com/?apikey=${apiKey}&i=${movie.imdbID}&plot=full`;
+
+    $.getJSON(movieUrl, (data) => {
+      displayModal(data);
+    });
   };
 
   //Add movies from response to grid
@@ -93,23 +146,12 @@ $(document).ready(() => {
         </div>
     `).data(movie);
 
-        $movieHtml.find(".movie-btn").on("click",() => {
-            loadMovie($movieHtml.data());
-        })
+      $movieHtml.find(".movie-btn").on("click", () => {
+        loadMovie($movieHtml.data());
+      });
 
       $movieResults.append($movieHtml);
-      
     });
-
-    /* $movieBtn.click((event) => {
-        console.log($(event.currentTarget.closest("div")).data());
-    }); */
-
-    /* $movieResults.find(".movie-btn").click((event) => {
-      console.log(event.currentTarget.closest("div"));
-
-      console.log($(event.currentTarget.closest("div")).data());
-    }); */
   };
 
   //Calculate information required for paging
