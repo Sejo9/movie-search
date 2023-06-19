@@ -27,7 +27,7 @@ $(document).ready(() => {
   const $modalPoster = $("#movie-img");
   const $modalDetails = $("#movie-details");
   const $modalTitle = $("#movie-title");
-  const $modalClose = $(".close")
+  const $modalClose = $(".close");
 
   //Set year input max value
   const setMaxYear = () => $year.attr("max", new Date().getFullYear());
@@ -83,30 +83,24 @@ $(document).ready(() => {
     $modalDetails.children ? $modalDetails.empty() : null;
 
     Object.keys(movie).forEach((key) => {
-        if(key === "Title"){
-            $modalDetails.append(
-                `<h1 id="movie-title">${movie[key]}</h1>`
-              );
-        }
+      if (key === "Title") {
+        $modalDetails.append(`<h1 id="movie-title">${movie[key]}</h1>`);
+      }
       if (key !== "Title" && key !== "Poster" && key !== "Response") {
         if (movie[key] !== "N/A") {
-            if(key == "Ratings"){
-                console.log(movie[key])
-                $modalDetails.append(
-                    `<p><strong>${key}</strong>:</p>`
-                  );
-                movie[key].forEach(rating => {
-                    $modalDetails.append(
-                        `<p class="rating"><strong>${rating.Source}</strong>: ${rating.Value}</p>`
-                      );
-                })
-                
-            }else{
-                $modalDetails.append(
-                    `<p><strong>${key}</strong>: ${movie[key]}</p>`
-                  );
-            }
-          
+          if (key == "Ratings") {
+            console.log(movie[key]);
+            $modalDetails.append(`<p><strong>${key}</strong>:</p>`);
+            movie[key].forEach((rating) => {
+              $modalDetails.append(
+                `<p class="rating"><strong>${rating.Source}</strong>: ${rating.Value}</p>`
+              );
+            });
+          } else {
+            $modalDetails.append(
+              `<p><strong>${key}</strong>: ${movie[key]}</p>`
+            );
+          }
         }
       }
     });
@@ -115,12 +109,12 @@ $(document).ready(() => {
   //Close modal upon clicking anywhere outside the modal
   $(window).click((event) => {
     if (event.target == $modal.get(0)) {
-        $modal.hide();
+      $modal.hide();
     }
-  })
+  });
 
   //Close modal upon clicking on close button
-  $modalClose.click(() => $modal.hide())
+  $modalClose.click(() => $modal.hide());
 
   //Get data for modal
   const loadMovie = (movie) => {
@@ -142,7 +136,7 @@ $(document).ready(() => {
 
             <p>${movie.Year}</p>
 
-            <button class="btn-secondary movie-btn" type="button">Show Information</button>
+            <button class="btn-secondary movie-btn" type="button">View Details</button>
         </div>
     `).data(movie);
 
@@ -223,6 +217,8 @@ $(document).ready(() => {
       $movieResults.empty();
 
       addMoviesToGrid(movies, $movieResults);
+
+      $(window).scrollTop(0);
     });
   };
 
@@ -245,6 +241,8 @@ $(document).ready(() => {
       $movieResults.empty();
 
       addMoviesToGrid(movies, $movieResults);
+
+      $(window).scrollTop(0);
     });
   };
 
