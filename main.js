@@ -41,15 +41,15 @@ $(document).ready(() => {
 
     if ($year.val()) {
       if ($type.val()) {
-        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&y=${$year.val()}&type=${$type.val()}`;
+        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&y=${$year.val()}&type=${$type.val()}/`;
       } else {
-        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&y=${$year.val()}`;
+        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&y=${$year.val()}/`;
       }
     } else {
       if ($type.val()) {
-        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&type=${$type.val()}`;
+        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&type=${$type.val()}/`;
       } else {
-        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}`;
+        return `http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}/`;
       }
     }
   };
